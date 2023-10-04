@@ -35,7 +35,6 @@ def get_csvs_df(path):
 
 # TO DO: add function to split data
 def split_data(df):
-    df = pd.read_csv('data/diabetes.csv')
     X, y = df[['Pregnancies','PlasmaGlucose','DiastolicBloodPressure','TricepsThickness','SerumInsulin','BMI','DiabetesPedigree','Age']].values, df['Diabetic'].values
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
     return X_train, X_test, y_train, y_test
@@ -43,8 +42,15 @@ def split_data(df):
 
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
-    LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
+    model=LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
 
+    # Evaluate model
+    score = model.score(X_test, y_test)
+    
+    # Log model and metrics
+    mlflow.sklearn.log_model(model, "model")
+    mlflow.log_metric("score", score)
+    return model,score
 
 def parse_args():
     # setup arg parser
