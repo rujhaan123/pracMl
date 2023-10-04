@@ -1,8 +1,12 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
-code: src
-command: >-
-  python train.py 
+code: model
+command: >
+  python train.py --training_data $AZUREML_DATAREFERENCE_training_data --reg_rate 0.01
+inputs:
+  training_data:
+    type: uri_folder
+    path: azureml://code/experimentation/paths/data
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: azureml:rbtest1
-experiment_name: diabetes-example
-description: Train a Logistic Regression classification model on the diabetes dataset that is stored locally.
+compute: rbtest1
+experiment_name: diabetes-dev-folder
+description: "First training job"
