@@ -5,7 +5,7 @@ command: >
 inputs:
   training_data:
     type: uri_folder
-    path: azureml://code/experimentation/paths/data
+    path: azureml:diabetes-dev-folder:1
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
 compute: rbtest1
 experiment_name: diabetes-dev-folder
