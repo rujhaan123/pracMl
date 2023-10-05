@@ -21,6 +21,7 @@ def main(args):
     # Train model
     train_model(args.reg_rate, X_train, X_test, y_train, y_test)
 
+
 def get_csvs_df(path):
     if not os.path.exists(path):
         raise RuntimeError(f"Cannot use a non-existent path provided: {path}")
@@ -29,11 +30,13 @@ def get_csvs_df(path):
         raise RuntimeError(f"No CSV files found in the provided data path: {path}")
     return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
 
+
 # TO DO: add function to split data
 def split_data(df):
-    X, y = df[['Pregnancies','PlasmaGlucose','DiastolicBloodPressure','TricepsThickness','SerumInsulin','BMI','DiabetesPedigree','Age']].values, df['Diabetic'].values
+    X, y = df[['Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure', 'TricepsThickness', 'SerumInsulin', 'BMI', 'DiabetesPedigree', 'Age']].values, df['Diabetic'].values
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
     return X_train, X_test, y_train, y_test
+
 
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # Train model
@@ -41,11 +44,12 @@ def train_model(reg_rate, X_train, X_test, y_train, y_test):
 
     # Evaluate model
     score = model.score(X_test, y_test)
-    
+
     # Log model and metrics
     mlflow.sklearn.log_model(model, "model")
     mlflow.log_metric("score", score)
     return model, score
+
 
 def parse_args():
     # Setup arg parser
@@ -60,6 +64,7 @@ def parse_args():
 
     # Return args
     return args
+
 
 # Run script
 if __name__ == "__main__":
