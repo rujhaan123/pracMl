@@ -35,10 +35,11 @@ jobs:
           python-version: 3.8
       - name: Install dependencies
         run: |
-          pip install flake8 pytest
+          python -m pip install flake8 
+          python -m pip install pytest
       - name: Run linting
         run: |
-          flake8 ./tests/.flake8
+          flake8 src/model/
       - name: Run unit tests
         run: |
           pytest ./tests/test_train.py
