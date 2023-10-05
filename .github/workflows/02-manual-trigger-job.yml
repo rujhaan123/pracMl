@@ -16,6 +16,6 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Create or update Azure Machine Learning job
-      run: az ml job create --file ./src/job.yml --resource-group Rujhaan --workspace-name rbmlt1
+      run: az ml job create --file ./src/job.yml --resource-group Rujhaan --workspace-name aml1
 
 
