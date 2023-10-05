@@ -15,5 +15,7 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Create or update Azure Machine Learning job
+      run: az ml job create --file ./src/job.yml --workspace-name rbmlt1
 
 
