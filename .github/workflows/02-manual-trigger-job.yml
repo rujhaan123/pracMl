@@ -44,4 +44,5 @@ jobs:
           flake8 src/model/
       - name: Run unit tests
         run: |
-          pytest src/model/
+          pip install mlflow
+          pytest ./tests/test_train.py
