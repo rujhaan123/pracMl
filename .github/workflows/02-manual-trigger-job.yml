@@ -1,10 +1,12 @@
-name: Manually trigger an Azure Machine Learning job
-
 on:
   workflow_dispatch:
+  pull_request:
+    types:
+      - closed
 
 jobs:
   train:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
