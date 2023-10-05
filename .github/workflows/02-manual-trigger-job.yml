@@ -21,6 +21,6 @@ jobs:
       run: az ml job create --file ./src/job.yml --resource-group Rujhaan --workspace-name aml1
     - name: Placeholder
       run: |
-        echo "Successful Job"
+        echo "Successful Job 1"
 
 
